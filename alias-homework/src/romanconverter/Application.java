@@ -18,7 +18,7 @@ public class Application {
             System.out.println("Give me an arabic number to be turned into a roman numeral");
             Integer userInput = inputHandler.getNumberInput();
             if (userInput != null) {
-                String convertedResult = "";
+                String convertedResult;
                 if (useApi) {
                     convertedResult = converter.convertUsingApi(userInput);
                 } else {

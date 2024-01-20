@@ -7,6 +7,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
 
 public class Converter {
     private final Map<Integer, String> romanDictionary;
@@ -31,8 +33,10 @@ public class Converter {
                 .method("POST", HttpRequest.BodyPublishers.ofString("text=" + input.toString()))
                 .build();
         HttpResponse<?> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        response.body();
-        return "";
+        List<String> responseBodyList = List.of(response.body().toString().split(" "));
+        OptionalInt translatedIndex = IntStream.range(0, responseBodyList.size()).filter(element -> responseBodyList.get(element).contains("translated")).findFirst();
+        String result = responseBodyList.get(translatedIndex.getAsInt() + 1);
+        return result.substring(0, result.length() - 2);
     }
 
     protected String convert(Integer input) {
@@ -41,9 +45,8 @@ public class Converter {
         int digitsListSize = digitsList.size();
         for (int i = 0; i < digitsListSize; i++) {
             String digitToConvert = digitsList.get(i);
-            result = convertDigits(Integer.parseInt(digitToConvert), digitsListSize - i);
+            result += convertDigits(Integer.parseInt(digitToConvert), digitsListSize - i);
         }
-        System.out.println(result);
         return result;
     }
 
