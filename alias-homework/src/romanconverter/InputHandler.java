@@ -10,14 +10,20 @@ public class InputHandler {
         this.scanner = new Scanner(System.in);
     }
 
-    protected Integer getUserInput(){
+    protected Integer getNumberInput() {
         try {
             return scanner.nextInt();
-        } catch (InputMismatchException inputMismatchException){
+        } catch (InputMismatchException inputMismatchException) {
             System.out.println("The input must be a whole number");
-        } catch (Exception exception){
+            System.out.println("Let's try again...");
+        } catch (Exception exception) {
             System.out.println("Error occurred while receiving input");
         }
         return null;
+    }
+
+    protected Boolean isNextNumber() {
+        String result = scanner.next();
+        return result.equalsIgnoreCase("Y");
     }
 }
