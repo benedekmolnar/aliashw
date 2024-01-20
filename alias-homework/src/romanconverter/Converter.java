@@ -33,10 +33,15 @@ public class Converter {
                 .method("POST", HttpRequest.BodyPublishers.ofString("text=" + input.toString()))
                 .build();
         HttpResponse<?> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        List<String> responseBodyList = List.of(response.body().toString().split(" "));
-        OptionalInt translatedIndex = IntStream.range(0, responseBodyList.size()).filter(element -> responseBodyList.get(element).contains("translated")).findFirst();
-        String result = responseBodyList.get(translatedIndex.getAsInt() + 1);
-        return result.substring(0, result.length() - 2);
+        if (response.statusCode() == 200) {
+            List<String> responseBodyList = List.of(response.body().toString().split(" "));
+            OptionalInt translatedIndex = IntStream.range(0, responseBodyList.size()).filter(element -> responseBodyList.get(element).contains("translated")).findFirst();
+            String result = responseBodyList.get(translatedIndex.getAsInt() + 1);
+            return result.substring(0, result.length() - 2);
+        } else {
+            System.out.println("Error occurred during API call");
+            return null;
+        }
     }
 
     protected String convert(Integer input) {
@@ -64,7 +69,7 @@ public class Converter {
     private String processDigit(Integer arabicNumber, Integer decimal) {
         String result = "";
         {
-            if (arabicNumber == 4){
+            if (arabicNumber == 4) {
                 result += romanDictionary.get(decimal);
                 result += romanDictionary.get(decimal * 5);
             } else if (arabicNumber >= 5 && arabicNumber < 9) {
