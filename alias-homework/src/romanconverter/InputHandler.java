@@ -17,6 +17,7 @@ public class InputHandler {
                 return result;
             } else {
                 System.out.println("The input must be between 0 and 4000");
+                System.out.println("Let's try again...");
                 return null;
             }
         } catch (InputMismatchException inputMismatchException) {
