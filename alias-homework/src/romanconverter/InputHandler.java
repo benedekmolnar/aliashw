@@ -12,7 +12,13 @@ public class InputHandler {
 
     protected Integer getNumberInput() {
         try {
-            return scanner.nextInt();
+            Integer result = scanner.nextInt();
+            if (0 < result && result < 4000){
+                return result;
+            } else {
+                System.out.println("The input must be between 0 and 4000");
+                return null;
+            }
         } catch (InputMismatchException inputMismatchException) {
             System.out.println("The input must be a whole number");
             System.out.println("Let's try again...");
