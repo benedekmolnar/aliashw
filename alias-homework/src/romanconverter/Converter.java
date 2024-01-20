@@ -1,5 +1,10 @@
 package romanconverter;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +21,18 @@ public class Converter {
                 500, "D",
                 1000, "M"
         );
+    }
+
+    protected String convertUsingApi(Integer input) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://api.funtranslations.com/translate/roman-numerals.json"))
+                .headers("Content-Type", "application/x-www-form-urlencoded")
+                .method("POST", HttpRequest.BodyPublishers.ofString("text=" + input.toString()))
+                .build();
+        HttpResponse<?> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        response.body();
+        return "";
     }
 
     protected String convert(Integer input) {

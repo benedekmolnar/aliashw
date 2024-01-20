@@ -29,8 +29,7 @@ public class InputHandler {
         return null;
     }
 
-    protected Boolean isNextNumber() {
-        String result = scanner.next();
-        return result.equalsIgnoreCase("Y");
+    protected Boolean isTrueInput() {
+        return scanner.next().equalsIgnoreCase("Y");
     }
 }
