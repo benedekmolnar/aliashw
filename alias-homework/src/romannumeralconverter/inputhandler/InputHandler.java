@@ -6,14 +6,14 @@ import java.util.Scanner;
 
 public class InputHandler {
     private final List<Integer> menuNumbersValidationList;
-    private final Integer lowestPossibleNumber;
-    private final Integer highestPossibleNumber;
+    private final Integer lowEndNumber;
+    private final Integer highEndNumber;
     private final Scanner scanner;
 
     public InputHandler() {
         this.menuNumbersValidationList = List.of(1, 2, 3);
-        this.lowestPossibleNumber = 1;
-        this.highestPossibleNumber = 3999;
+        this.lowEndNumber = 1;
+        this.highEndNumber = 3999;
         this.scanner = new Scanner(System.in);
     }
 
@@ -29,10 +29,10 @@ public class InputHandler {
                     return null;
                 }
             } else {
-                if (lowestPossibleNumber <= input && input <= highestPossibleNumber) {
+                if (lowEndNumber < input && input < highEndNumber) {
                     return input;
                 } else {
-                    System.out.println("The input must be between " + lowestPossibleNumber + " and " + highestPossibleNumber);
+                    System.out.println("The input must be between " + lowEndNumber + " and " + highEndNumber);
                     System.out.println("Let's try again...");
                     return null;
                 }
