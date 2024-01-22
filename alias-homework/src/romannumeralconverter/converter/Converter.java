@@ -1,4 +1,4 @@
-package romanconverter;
+package romannumeralconverter.converter;
 
 import java.io.IOException;
 import java.net.URI;
@@ -25,7 +25,14 @@ public class Converter {
         );
     }
 
-    protected String convertUsingApi(Integer input) throws IOException, InterruptedException {
+    public String convertTest(Integer input) throws IOException, InterruptedException {
+        String appResult = convert(input);
+        String apiResult = convertUsingApi(input);
+        String mainResult = appResult + " (APP) - " + apiResult + " (API)\n";
+        return appResult.equals(apiResult) ? mainResult + "The results are identical" : mainResult + "The results are not identical";
+    }
+
+    public String convertUsingApi(Integer input) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.funtranslations.com/translate/roman-numerals.json"))
@@ -37,14 +44,14 @@ public class Converter {
             List<String> responseBodyList = List.of(response.body().toString().split(" "));
             OptionalInt translatedIndex = IntStream.range(0, responseBodyList.size()).filter(element -> responseBodyList.get(element).contains("translated")).findFirst();
             String result = responseBodyList.get(translatedIndex.getAsInt() + 1);
-            return result.substring(0, result.length() - 2);
+            return result.substring(0, result.length() - 2).replace("\"", "");
         } else {
             System.out.println("Error occurred during API call");
             return null;
         }
     }
 
-    protected String convert(Integer input) {
+    public String convert(Integer input) {
         String result = "";
         List<String> digitsList = List.of(input.toString().split(""));
         int digitsListSize = digitsList.size();
