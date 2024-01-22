@@ -1,7 +1,5 @@
-package romannumeralconverter;
-
-import romannumeralconverter.converter.Converter;
-import romannumeralconverter.inputhandler.InputHandler;
+import converter.Converter;
+import inputhandler.InputHandler;
 
 import java.io.IOException;
 

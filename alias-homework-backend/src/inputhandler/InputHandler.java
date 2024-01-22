@@ -1,4 +1,4 @@
-package romannumeralconverter.inputhandler;
+package inputhandler;
 
 import java.util.InputMismatchException;
 import java.util.List;

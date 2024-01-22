@@ -1,4 +1,4 @@
-package romannumeralconverter.converter;
+package converter;
 
 import java.io.IOException;
 import java.net.URI;
