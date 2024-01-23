@@ -22,7 +22,7 @@
         </div>
         <div class="card mx-3" style="width: 18rem;">
             <div class="card-body">
-            <h5 class="card-title">Select image type</h5>
+            <h5 class="card-title">Select image filter</h5>
                 <input type="radio" id="blur" name="image-filter" value="blur">
                 <label for="blur">Blur</label><br>
                 <input type="radio" id="mono" name="image-filter" value="mono">
@@ -41,13 +41,14 @@
             <div class="card-body">
             <h5 class="card-title">Select image width and/or height</h5>
                 <label for="width">Width</label><br>
-                <input type="text" id="width" name="image-width"><br>
+                <input type="number" id="width" name="image-width"><br>
                 <label for="height">Height</label><br>
-                <input type="text" id="height" name="image-height"><br><br>
+                <input type="number" id="height" name="image-height"><br><br>
             </div>
         </div>
     </div>
     <div class="col text-center">
         <button type="button" id="get-cat-image" class="btn btn-success mt-3">GET CAT PICTURE IMMEDIATELY!</button>
     </div>
+    <div class="h-100 d-flex align-items-center justify-content-center mt-3" id="image-div"></div>
 </body>
